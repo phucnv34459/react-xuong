@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import Home from "./pages/Home";
+import LayoutAdmin from "./Layouts/LayoutAdmin";
+import LayoutClient from "./Layouts/LayoutClient";
+import instance, { getProducts } from "./axios";
 import About from "./pages/About";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Notfound from "./pages/Notfound";
-import instance, { getProducts } from "./axios";
 import ProductDetail from "./pages/ProductDetail";
-import Dashboard from "./pages/admin/Dashboard";
-import ProductAdd from "./pages/admin/ProductAdd";
-import ProductEdit from "./pages/admin/ProductEdit";
-import ProductForm from "./pages/admin/ProductFrom";
 import Register from "./pages/Register";
+import Dashboard from "./pages/admin/Dashboard";
+import ProductForm from "./pages/admin/ProductFrom";
 
 function App() {
 	const [products, setProducts] = useState([]);
@@ -96,25 +94,26 @@ function App() {
 	};
 	return (
 		<>
-			<Header />
 			<main>
 				<Routes>
+					<Route path="/" element={<LayoutClient/>} >
 					<Route path="/" element={<Home data={products} />} />
 					<Route path="/home" element={<Navigate to="/" />} />
 					<Route path="/product-detail/:id" element={<ProductDetail />} />
 					<Route path="/about" element={<About />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/admin" element={<Dashboard data={products} Remove={handleRemove} />} />
+					</Route>
+					<Route path="/admin" element={<LayoutAdmin/>} >
+                    <Route path="/admin" element={<Dashboard data={products} Remove={handleRemove} />} />
 					{/* <Route path="/admin/product-add" element={<ProductAdd onAdd={handleSubmit} />} />
 					<Route path="/admin/product-edit/:id" element={<ProductEdit onEdit={handleSubmitEdit} />} /> */}
 					<Route path="/admin/product-form/:id" element={<ProductForm onProduct={handleSubmitForm}/>} />
 					<Route path="/admin/product-form" element={<ProductForm onProduct={handleSubmitForm}/>} />
-					<Route path="/register" element={<Register />} />
+					</Route>
 					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
 					<Route path="*" element={<Notfound />} />
 				</Routes>
 			</main>
-			<Footer />
 		</>
 	);
 }
