@@ -4,26 +4,28 @@ import productSchema from '../../schemaValid/productSchemaValid';
 import instance from '../../axios';
 import { useParams } from 'react-router-dom';
 import { zodResolver } from "@hookform/resolvers/zod";
-const ProductForm = ({onEdit}) => {
+const ProductForm = ({onProduct}) => {
     const {id} = useParams();
     const {register,formState:{errors},handleSubmit,reset} = useForm({resolver:zodResolver(productSchema)});
-    useEffect(()=>{
-        (async()=>{
-            try {
-                const {data} = await instance.get(`/products/${id}`);
-                reset(data);
-            } catch (error) {
-                console.log(error);
-            }
-        })();
-    },[]);
+    if(id){
+        useEffect(()=>{
+            (async()=>{
+                try {
+                    const {data} = await instance.get(`/products/${id}`);
+                    reset(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            })();
+        },[]);
+    }
     const onSubmit = (data) =>{
-        onEdit({...data,id});
+        onProduct({...data,id});
     }
   return (
     <div>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<h1>Product Edit</h1>
+				<h1>{id ? "Product Edit" : "Product Add" }</h1>
 				<div className="mb-3">
 					<label htmlFor="title" className="form-label">
 						Title
@@ -52,7 +54,7 @@ const ProductForm = ({onEdit}) => {
 				</div>
 				<div className="mb-3">
 					<button className="btn btn-primary w-100" type="submit">
-						Add Product
+                    {id ? "Product Edit" : "Product Add" }
 					</button>
 				</div>
 			</form>
