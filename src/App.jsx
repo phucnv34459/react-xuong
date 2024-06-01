@@ -12,6 +12,7 @@ import Dashboard from "./pages/admin/Dashboard";
 import ProductAdd from "./pages/admin/ProductAdd";
 import ProductEdit from "./pages/admin/ProductEdit";
 import ProductForm from "./pages/admin/ProductFrom";
+import Register from "./pages/Register";
 
 function App() {
 	const [products, setProducts] = useState([]);
@@ -108,6 +109,8 @@ function App() {
 					<Route path="/admin/product-edit/:id" element={<ProductEdit onEdit={handleSubmitEdit} />} /> */}
 					<Route path="/admin/product-form/:id" element={<ProductForm onProduct={handleSubmitForm}/>} />
 					<Route path="/admin/product-form" element={<ProductForm onProduct={handleSubmitForm}/>} />
+					<Route path="/register" element={<Register />} />
+					<Route path="/login" element={<Login />} />
 					<Route path="*" element={<Notfound />} />
 				</Routes>
 			</main>
