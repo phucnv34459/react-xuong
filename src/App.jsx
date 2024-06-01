@@ -6,10 +6,11 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Notfound from "./pages/Notfound";
-import instance from "./axios";
+import instance, { getProducts } from "./axios";
 import ProductDetail from "./pages/ProductDetail";
 import Dashboard from "./pages/admin/Dashboard";
 import ProductAdd from "./pages/admin/ProductAdd";
+import ProductEdit from "./pages/admin/ProductEdit";
 
 function App() {
 	const [products, setProducts] = useState([]);
@@ -41,6 +42,21 @@ function App() {
 			}
 		})();
 	};
+	const handleSubmitEdit = (data) => {
+		(async () => {
+			try {
+    await instance.patch(`/products/${data.id}`, data);
+	const newData = await getProducts();
+				setProducts( newData);
+				if (confirm("Edit product successfully, redirect to admin page!")) {
+					// navigate("/admin");
+					window.location.href = "/admin";
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		})();
+	};
 	return (
 		<>
 			<Header />
@@ -53,6 +69,7 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/admin" element={<Dashboard data={products} />} />
 					<Route path="/admin/product-add" element={<ProductAdd onAdd={handleSubmit} />} />
+					<Route path="/admin/product-edit/:id" element={<ProductEdit onEdit={handleSubmitEdit} />} />
 					<Route path="*" element={<Notfound />} />
 				</Routes>
 			</main>
