@@ -79,6 +79,20 @@ function App() {
 			}
 		})();
 	};
+
+	const handleRemove = (id) => {
+		(async () => {
+			try {
+				if (confirm("Are you sure?")) {
+				await instance.delete(`/products/${id}`);
+				const newData = products.filter(i => i.id !== id ? i : null);
+				setProducts(newData);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		})();
+	};
 	return (
 		<>
 			<Header />
@@ -89,7 +103,7 @@ function App() {
 					<Route path="/product-detail/:id" element={<ProductDetail />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/login" element={<Login />} />
-					<Route path="/admin" element={<Dashboard data={products} />} />
+					<Route path="/admin" element={<Dashboard data={products} Remove={handleRemove} />} />
 					{/* <Route path="/admin/product-add" element={<ProductAdd onAdd={handleSubmit} />} />
 					<Route path="/admin/product-edit/:id" element={<ProductEdit onEdit={handleSubmitEdit} />} /> */}
 					<Route path="/admin/product-form/:id" element={<ProductForm onProduct={handleSubmitForm}/>} />
