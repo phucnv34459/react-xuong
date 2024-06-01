@@ -545,5 +545,17 @@
       "description": "asd",
       "id": 32
     }
+  ],
+  "users": [
+    {
+      "email": "phucnv34459@gmail.com",
+      "password": "$2a$10$t0Iq6jdJQBn8S6X.s9bs7uChBHZCFBh61GxTrDhspeXKeqSe0osIa",
+      "id": 1
+    },
+    {
+      "email": "phucnvph34459@gmail.com",
+      "password": "$2a$10$UMdAMwu0cSALBhgXa/X6/.ob1RVPfC/dtEpTLy.aRn8ViWurW3jg6",
+      "id": 2
+    }
   ]
 }
