@@ -1,31 +1,40 @@
-import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import productSchema from '../../schemaValid/productSchemaValid';
-import instance from '../../axios';
-import { useParams } from 'react-router-dom';
 import { zodResolver } from "@hookform/resolvers/zod";
-const ProductForm = ({onProduct}) => {
-    const {id} = useParams();
-    const {register,formState:{errors},handleSubmit,reset} = useForm({resolver:zodResolver(productSchema)});
-    if(id){
-        useEffect(()=>{
-            (async()=>{
-                try {
-                    const {data} = await instance.get(`/products/${id}`);
-                    reset(data);
-                } catch (error) {
-                    console.log(error);
-                }
-            })();
-        },[]);
-    }
-    const onSubmit = (data) =>{
-        onProduct({...data,id});
-    }
-  return (
-    <div>
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import { useForm } from "react-hook-form";
+import productSchema from "../../schemaValid/productSchemaValid";
+import instance from "../../axios";
+
+const ProductForm = ({ onProduct }) => {
+	const { id } = useParams();
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+		reset,
+	} = useForm({ resolver: zodResolver(productSchema) });
+
+	if (id) {
+		useEffect(() => {
+			(async () => {
+				try {
+					const { data } = await instance.get(`/products/${id}`);
+					reset(data);
+				} catch (error) {
+					console.log(error);
+				}
+			})();
+		}, []);
+	}
+
+	const onSubmit = (data) => {
+		onProduct({ ...data, id });
+	};
+	return (
+		<>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<h1>{id ? "Product Edit" : "Product Add" }</h1>
+				<h1>{id ? "Product Edit" : "Product Add"}</h1>
 				<div className="mb-3">
 					<label htmlFor="title" className="form-label">
 						Title
@@ -54,12 +63,12 @@ const ProductForm = ({onProduct}) => {
 				</div>
 				<div className="mb-3">
 					<button className="btn btn-primary w-100" type="submit">
-                    {id ? "Product Edit" : "Product Add" }
+						{id ? "Product Edit" : "Product Add"}
 					</button>
 				</div>
 			</form>
-		</div>
-  )
-}
+		</>
+	);
+};
 
-export default ProductForm
+export default ProductForm;

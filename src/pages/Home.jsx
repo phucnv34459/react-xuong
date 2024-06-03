@@ -1,22 +1,19 @@
 import React from "react";
-import style from "./home.module.scss";
-import TruncateDescription from "./TruncateDescription";
+import ProductItem from "../components/ProductItem";
+
 function Home({ data }) {
 	return (
 		<>
-		<div className="container">
-		<h1>Danh sach san pham</h1>
-			{data.map((product) => (
-				<div key={product.id} className={style.card}>
-					<img src={product.thumbnail} alt="" />
-					<h2>{product.name}</h2>
-					<p>${product.price}</p>
-					<TruncateDescription description={product.description} maxLength={30} />
-					<button className="btn btn-danger">Add to cart</button>
-				</div>
-			))}
-		</div>	
+			<h1>Danh sach san pham</h1>
+			<div className="row">
+				{data.map((item) => (
+					<div className="col-12 col-sm-6 col-md-4 col-lg-3">
+						<ProductItem data={item} />
+					</div>
+				))}
+			</div>
 		</>
 	);
 }
+
 export default Home;

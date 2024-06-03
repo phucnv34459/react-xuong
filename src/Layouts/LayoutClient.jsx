@@ -1,10 +1,16 @@
-import React from 'react'
+import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
-const LayoutClient = () => {
-  return (
-    <div>
-    </div>
-  )
-}
+const LayoutClient = ({ children, data }) => {
+	console.log(data);
+	return (
+		<>
+			<Header />
+			<main className="container">{children}</main>
+			<Footer />
+		</>
+	);
+};
 
-export default LayoutClient
+export default LayoutClient;

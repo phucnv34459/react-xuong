@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 2,
-      "title": "iPhone X",
+      "title": "iPhone X x",
       "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD ",
       "price": 899,
       "discountPercentage": 17.94,
@@ -544,6 +544,12 @@
       "price": 5000,
       "description": "asd",
       "id": 32
+    },
+    {
+      "title": "rtewt",
+      "price": 900,
+      "description": "ẻt",
+      "id": 33
     }
   ],
   "users": [
