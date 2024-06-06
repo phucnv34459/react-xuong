@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import s from "./Productitem.module.scss";
 const ProductItem = ({ data }) => {
 	return (
-		<div className={s.productItem} key={data.id}>
+		<div className={s.productItem} >
 			<Link to={`/product-detail/${data.id}`}>
 				<img src={data.thumbnail} alt="" />
 			</Link>

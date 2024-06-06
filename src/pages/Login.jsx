@@ -1,9 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
-import authSchema from "../schemaValid/authSchema";
 import instance from "../axios";
 import { useNavigate } from "react-router-dom";
+// src/components/Login.jsx
+import authSchema from '/src/schemaValid/authSchema.js';
+
 
 const Login = () => {
 	const nav = useNavigate();
@@ -14,17 +16,15 @@ const Login = () => {
 	} = useForm({
 		resolver: zodResolver(authSchema),
 	});
-	const onSubmit = (data) => {
-		(async()=>{
-         try {
-            const res = await instance.post(`/login`,data);
+	const onSubmit = async (data) => {
+		try {
+            const res = await instance.post(`/login`, data);
 			if (confirm("Login successfully, redirect to home page!")) {
 				nav("/");
 			}
          } catch (error) {
-			alert(error?.response?.data)
+			alert(error?.response?.data);
          } 
-        })();
 	};
 	return (
 		<div>
@@ -46,7 +46,7 @@ const Login = () => {
 				</div>
 				<div className="mb-3">
 					<button className="btn btn-primary w-100" type="submit">
-					 Register
+						Login
 					</button>
 				</div>
 			</form>
@@ -55,3 +55,4 @@ const Login = () => {
 };
 
 export default Login;
+
