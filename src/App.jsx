@@ -5,14 +5,11 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import About from "./pages/About";
 import Dashboard from "./pages/admin/Dashboard";
-
 import Home from "./pages/Home";
-import Login from "./pages/Login";
 import Notfound from "./pages/Notfound";
 import ProductDetail from "./pages/ProductDetail";
-import Register from "./pages/Register";
 import ProductForm from "./pages/admin/ProductFrom";
-import AuthForm from "./pages/AuthForm";
+import AuthForm from "./components/AuthForm";
 
 function App() {
 	const [products, setProducts] = useState([]);
