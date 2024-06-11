@@ -1,5 +1,5 @@
 function Footer() {
-  return <footer>Copyright by phucnv</footer>;
+  return <footer className="bg-green-900">Copyright by phucnv</footer>;
 }
 
 export default Footer;

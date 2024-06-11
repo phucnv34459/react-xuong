@@ -78,7 +78,7 @@ function App() {
 					<Route path="/" element={<LayoutClient/>}>
 					<Route index element={<Home data={products} />} />
 					<Route path="/home" element={<Navigate to="/" />} />
-					<Route path="/product-detail/:id" element={<ProductDetail />} />
+					<Route path="/product-detail/:id" element={<ProductDetail ps={products} />} />
 					<Route path="/about" element={<About />} />
 					</Route>
 					
