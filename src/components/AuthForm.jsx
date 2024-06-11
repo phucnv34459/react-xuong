@@ -27,7 +27,7 @@ const AuthForm = ({ isRegister }) => {
 					const result = await instance.post(`/login`, data);
 					localStorage.setItem("user", JSON.stringify(result.data));
 					if (confirm("Successfully, redirect home page?")) {
-						nav("/");
+						nav("/admin");
 					}
 				}
 			} catch (error) {

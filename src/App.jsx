@@ -10,6 +10,10 @@ import Notfound from "./pages/Notfound";
 import ProductDetail from "./pages/ProductDetail";
 import ProductForm from "./pages/admin/ProductFrom";
 import AuthForm from "./components/AuthForm";
+import LayoutClient from "./Layouts/LayoutClient";
+import LayoutAdmin from "./Layouts/LayoutAdmin";
+import { ToastContainer, toast } from "react-toastify";
+import Check from "./components/Check";
 
 function App() {
 	const [products, setProducts] = useState([]);
@@ -57,6 +61,7 @@ function App() {
 					await instance.delete(`/products/${id}`);
 					const newData = products.filter((item) => item.id !== id && item);
 					setProducts(newData);
+					toast.success("Product deleted successfully!")
 				}
 			} catch (error) {
 				console.log(error);
@@ -66,19 +71,25 @@ function App() {
 	console.log(<Header />);
 	return (
 		<>
-			<Header />
+			
 			<main>
 				<Routes>
 					{/* path for client */}
+					<Route path="/" element={<LayoutClient/>}>
 					<Route index element={<Home data={products} />} />
 					<Route path="/home" element={<Navigate to="/" />} />
 					<Route path="/product-detail/:id" element={<ProductDetail />} />
 					<Route path="/about" element={<About />} />
-
+					</Route>
+					
 					{/* path for admin */}
-					<Route path="/admin" element={<Dashboard data={products} remove={handleRemove} />} />
+					<Route element={<Check/>}>
+					<Route path="/admin" element={<LayoutAdmin/>}>
+					<Route index element={<Dashboard data={products} Remove={handleRemove} />} />
 					<Route path="/admin/product-form" element={<ProductForm onProduct={handleSubmitForm} />} />
 					<Route path="/admin/product-form/:id" element={<ProductForm onProduct={handleSubmitForm} />} />
+					</Route>
+					</Route>
 
 					{/* path empty */}
 					{/* <Route path="/register" element={<Register />} />
@@ -87,9 +98,8 @@ function App() {
 					<Route path="/login" element={<AuthForm />} />
 					<Route path="*" element={<Notfound />} />
 				</Routes>
+				<ToastContainer/>
 			</main>
-
-			<Footer />
 		</>
 	);
 }

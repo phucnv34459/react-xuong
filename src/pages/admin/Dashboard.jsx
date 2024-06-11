@@ -1,18 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = ({ data,Remove }) => {
-	console.log(data);
-	// const Remove = (id) => {
-		
-	// }
+	const navigate = useNavigate();
+   	const Logout = () =>{
+		if (confirm("Are you sure?")) {
+			localStorage.removeItem('token');
+			navigate('/')
+		}
+	}
 	return (
 		<div>
-			<h1>Hello, admin</h1>
-			<Link to="/admin/product-form" className="btn btn-primary">
+			<header>
+				<ul>
+					<li onClick={Logout} className="btn btn-danger">Logout</li>
+				</ul>
+			</header>
+			<h1 className="ml-2">Hello, Admin</h1>
+			<Link to="/admin/product-form" className="btn btn-primary mb-4 ml-2">
 				Add new product
 			</Link>
-			<table className="table table-bordered table-striped text-center">
+			<table className="table table-bordered table-striped text-center ml-2">
 				<thead>
 					<tr>
 						<th>ID</th>
