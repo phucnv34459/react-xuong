@@ -6,6 +6,7 @@ import TruncateDescription from "../pages/TruncateDescription";
 const ProductItem = ({ data }) => {
 	return (
 		<div className={s.productItem} >
+			
 			<Link to={`/product-detail/${data.id}`}>
 				<img src={data.thumbnail} alt="" />
 			</Link>

@@ -720,7 +720,7 @@
       "confirmPass": "123456",
       "id": 3
     },
-    {
+    { "name":"Chin",
       "email": "phucvan050004@gmail.com",
       "password": "$2a$10$owFtAmxtc3ry9SDHwDiXMOTKD43bxnS7DULXb39xLH9PnHCF2bfsS",
       "confirmPass": "123456",

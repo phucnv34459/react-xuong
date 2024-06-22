@@ -1,0 +1,28 @@
+.bannerContainer {
+    width: 100%;
+    margin-top: -15px;
+    margin-bottom: 50px;
+    height: 400px; /* Adjust height as needed */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .bannerSlides {
+    display: flex;
+    transition: transform 0.5s ease; /* Smooth transition */
+  }
+  
+  .bannerSlide {
+    flex: 1; /* Make slides occupy equal space */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .bannerSlide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio and fill the container */
+  }
