@@ -13,7 +13,7 @@ import AuthForm from "./components/AuthForm";
 import LayoutClient from "./Layouts/LayoutClient";
 import LayoutAdmin from "./Layouts/LayoutAdmin";
 import { ToastContainer, toast } from "react-toastify";
-import Check from "./components/Check";
+import PrivateRouter from "./components/PrivateRouter";
 
 function App() {
 	const [products, setProducts] = useState([]);
@@ -74,6 +74,7 @@ function App() {
 			
 			<main>
 				<Routes>
+					
 					{/* path for client */}
 					<Route path="/" element={<LayoutClient/>}>
 					<Route index element={<Home data={products} />} />
@@ -83,11 +84,12 @@ function App() {
 					</Route>
 					
 					{/* path for admin */}
-					<Route element={<Check/>}>
+					<Route path="/admin" element={<PrivateRouter/>}>
 					<Route path="/admin" element={<LayoutAdmin/>}>
 					<Route index element={<Dashboard data={products} Remove={handleRemove} />} />
 					<Route path="/admin/product-form" element={<ProductForm onProduct={handleSubmitForm} />} />
 					<Route path="/admin/product-form/:id" element={<ProductForm onProduct={handleSubmitForm} />} />
+					
 					</Route>
 					</Route>
 
