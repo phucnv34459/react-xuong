@@ -27,7 +27,7 @@ const AuthForm = ({ isRegister }) => {
 					const result = await instance.post(`/login`, data);
 					localStorage.setItem("user", JSON.stringify(result.data));
 					if (  confirm("Successfully, redirect home page?")) {
-						nav("/admin");
+						nav("/");
 					}else{
                      
 					}
@@ -46,7 +46,8 @@ const AuthForm = ({ isRegister }) => {
 						email
 					</label>
 					<input type="email" className="form-control" id="email" {...register("email", { required: true })} />
-					{errors.email?.message && <p className="text-danger">{errors.email?.message}</p>}
+					<div className="font-bold text-red-600">{errors.email && <p>{errors.email?.message}</p>}</div>
+
 				</div>
 				<div className="mb-3">
 					<label htmlFor="password" className="form-label">

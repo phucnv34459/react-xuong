@@ -17,7 +17,7 @@ const Banner = () => {
     showSlide(currentSlide);
 
     const intervalId = setInterval(() => {
-      const nextSlide = currentSlide + 1;
+      var nextSlide = currentSlide + 1;
       if (nextSlide >= BannerSlide.length) {
         nextSlide = 0;
       }

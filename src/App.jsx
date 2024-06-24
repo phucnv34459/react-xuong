@@ -1,73 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import LayoutAdmin from "./Layouts/LayoutAdmin";
+import LayoutClient from "./Layouts/LayoutClient";
 import instance, { getProducts } from "./axios";
-import Footer from "./components/Footer";
+import AuthForm from "./components/AuthForm";
 import Header from "./components/Header";
+import PrivateRouter from "./components/PrivateRouter";
 import About from "./pages/About";
-import Dashboard from "./pages/admin/Dashboard";
 import Home from "./pages/Home";
 import Notfound from "./pages/Notfound";
 import ProductDetail from "./pages/ProductDetail";
+import Dashboard from "./pages/admin/Dashboard";
 import ProductForm from "./pages/admin/ProductFrom";
-import AuthForm from "./components/AuthForm";
-import LayoutClient from "./Layouts/LayoutClient";
-import LayoutAdmin from "./Layouts/LayoutAdmin";
-import { ToastContainer, toast } from "react-toastify";
-import PrivateRouter from "./components/PrivateRouter";
 
 function App() {
-	const [products, setProducts] = useState([]);
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		(async () => {
-			try {
-				const { data } = await instance.get("/products");
-				setProducts(data);
-			} catch (error) {
-				console.log(error);
-			}
-		})();
-	}, []);
-
-	const handleSubmitForm = (data) => {
-		(async () => {
-			try {
-				if (data.id) {
-					// logic cho edit product
-					await instance.patch(`/products/${data.id}`, data);
-					const newData = await getProducts();
-					setProducts(newData);
-				} else {
-					// logic cho add product
-					const res = await instance.post("/products", data);
-					setProducts([...products, res.data]);
-				}
-				if (confirm("Successfully, redirect to admin page!")) {
-					window.location.href="/admin"
-					// navigate("/admin");
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		})();
-	};
-
-	const handleRemove = (id) => {
-		console.log(id);
-		(async () => {
-			try {
-				if (confirm("Are yout sure?")) {
-					await instance.delete(`/products/${id}`);
-					const newData = products.filter((item) => item.id !== id && item);
-					setProducts(newData);
-					toast.success("Product deleted successfully!")
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		})();
-	};
 	console.log(<Header />);
 	return (
 		<>
@@ -77,18 +24,18 @@ function App() {
 					
 					{/* path for client */}
 					<Route path="/" element={<LayoutClient/>}>
-					<Route index element={<Home data={products} />} />
+					<Route index element={<Home  />} />
 					<Route path="/home" element={<Navigate to="/" />} />
-					<Route path="/product-detail/:id" element={<ProductDetail ps={products} />} />
-					<Route path="/about" element={<About />} />
+					<Route path="/product-detail/:id" element={<ProductDetail />} />
+					<Route path="/product" element={<About />} />
 					</Route>
 					
 					{/* path for admin */}
 					<Route path="/admin" element={<PrivateRouter/>}>
 					<Route path="/admin" element={<LayoutAdmin/>}>
-					<Route index element={<Dashboard data={products} Remove={handleRemove} />} />
-					<Route path="/admin/product-form" element={<ProductForm onProduct={handleSubmitForm} />} />
-					<Route path="/admin/product-form/:id" element={<ProductForm onProduct={handleSubmitForm} />} />
+					<Route index element={<Dashboard   />} />
+					<Route path="/admin/product-form" element={<ProductForm  />} />
+					<Route path="/admin/product-form/:id" element={<ProductForm  />} />
 					
 					</Route>
 					</Route>

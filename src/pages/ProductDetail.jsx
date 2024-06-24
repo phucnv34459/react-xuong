@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import instance from "../axios";
 import s from "./ProductDetail.module.scss";
-const ProductDetail = ({ps}) => {
+import { ProductContext } from "../contexts/ProductContext";
+const ProductDetail = () => {
+	const context = useContext(ProductContext);
 	const { id } = useParams();
 	const [p, setP] = useState({});
 	useEffect(() => {
@@ -17,6 +19,7 @@ const ProductDetail = ({ps}) => {
 	}, []);
 	return (
 		<div>
+			<h1 class="text-center mb-2 mt-2">Chi tết sản phẩm</h1>
          <div className={s.productDetailContainer}>
 			<div className={s.productGallery}>
 				<img src={p.thumbnail} alt="Sản phẩm chính" className={s.mainImage} />
@@ -33,13 +36,15 @@ const ProductDetail = ({ps}) => {
          <div>
 			<h2 style={{textAlign:"center",marginTop:"10px"}}>Sản phẩm liên quan</h2>
 		 <div className={s.relatedProducts}>
-			{ps.map((p)=>(
+			{context?.state.products.map((p)=>(
 				<div className={s.relatedProductsList}>
-				<div className={s.relatedProductItem}>
-					<img src={p.thumbnail}  alt="Sản phẩm liên quan 1" />
+					<Link to={`/product-detail/${p.id}`} key={p.id}>
+					<div className={s.relatedProductItem}>
+					<img src={p.thumbnail}  alt="Sản phẩm liên quan " />
 					<h3>{p.title}</h3>
 					<p className={s.relatedProductPrice}>${p.price}</p>
 				</div>
+					</Link>
 				</div>
 			))}
 	</div>

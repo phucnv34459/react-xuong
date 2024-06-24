@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ProductContext } from "../../contexts/ProductContext";
+import instance from "../../axios";
+import { toast } from "react-toastify";
 
-const Dashboard = ({ data,Remove }) => {
+const Dashboard = () => {
 	const navigate = useNavigate();
+	const {state,dispatch} = useContext(ProductContext);
+
+	//Xoa san pham
+	const Remove = async (id) =>{
+		try{
+        if (confirm("Are you sure?")) {
+			await instance.delete(`/products/${id}`);
+			dispatch({type:"REMOVE",payload:id});
+			toast.success("Delete success!");
+		}
+		}catch(error){
+			console.log(error);
+		}
+	}
    	const Logout = () =>{
 		if (confirm("Are you sure?")) {
 			localStorage.removeItem('token');
@@ -32,7 +49,7 @@ const Dashboard = ({ data,Remove }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{data.map((p) => (
+					{state.products.map((p) => (
 						<tr key={p.id}>
 							<td>{p.id}</td>
 							<td>{p.title}</td>
