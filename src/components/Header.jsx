@@ -15,7 +15,7 @@ export default function Header() {
         <li><a href="/" class="nav-link px-2 link-secondary text-white">Home</a></li>
         <li><a href="/product" class="nav-link px-2  text-white">Product</a></li>
         <li><a href="*" class="nav-link px-2  text-white">Post</a></li>
-        <li><a href="*" class="nav-link px-2  text-white">FAQs</a></li>
+        <li><a href="/search" class="nav-link px-2  text-white">Search</a></li>
       </ul>
       
       <div class="col-md-3 text-end text" >

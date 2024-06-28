@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import LayoutAdmin from "./Layouts/LayoutAdmin";
 import LayoutClient from "./Layouts/LayoutClient";
-import instance, { getProducts } from "./axios";
 import AuthForm from "./components/AuthForm";
 import Header from "./components/Header";
 import PrivateRouter from "./components/PrivateRouter";
@@ -13,6 +12,7 @@ import Notfound from "./pages/Notfound";
 import ProductDetail from "./pages/ProductDetail";
 import Dashboard from "./pages/admin/Dashboard";
 import ProductForm from "./pages/admin/ProductFrom";
+import Seach from "./components/Seach";
 
 function App() {
 	console.log(<Header />);
@@ -28,6 +28,7 @@ function App() {
 					<Route path="/home" element={<Navigate to="/" />} />
 					<Route path="/product-detail/:id" element={<ProductDetail />} />
 					<Route path="/product" element={<About />} />
+					<Route path="search" element={<Seach/>}/>
 					</Route>
 					
 					{/* path for admin */}

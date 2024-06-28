@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import ProductItem from "../components/ProductItem";
-import Banner from "../components/Banner";
+// import Banner from "../components/Banner";
 import { ProductContext } from "../contexts/ProductContext";
+import Seach from "../components/Seach";
 
 
 function Home() {
@@ -9,7 +10,7 @@ function Home() {
 	return (
 		<>  
 		    
-		<Banner/>
+		{/* <Banner/> */}
 			<div className="row">
 				{context?.state.products.map((item) => (
 					<div className="col-12 col-sm-6 col-md-4 col-lg-3"  key={item.id}>

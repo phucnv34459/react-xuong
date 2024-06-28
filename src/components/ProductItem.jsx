@@ -5,7 +5,7 @@ import s from "./Productitem.module.scss";
 import TruncateDescription from "../pages/TruncateDescription";
 const ProductItem = ({ data }) => {
 	return (
-		<div className={s.productItem} >
+		<div key={data.id} className={s.productItem} >
 			
 			<Link to={`/product-detail/${data.id}`}>
 				<img src={data.thumbnail} alt="" />
